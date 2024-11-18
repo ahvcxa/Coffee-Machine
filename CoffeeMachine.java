@@ -78,5 +78,6 @@ public class CoffeeMachine extends JFrame {
 		exitButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
 		contentPane.add(exitButton);
 		
+
 	}
 }
