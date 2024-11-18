@@ -25,6 +25,7 @@ public class CoffeeMachine extends JFrame {
 				try {
 					CoffeeMachine frame = new CoffeeMachine();
 					frame.setVisible(true);
+					frame.setTitle("Coffee Machine");    // added name for the program title
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,8 +49,8 @@ public class CoffeeMachine extends JFrame {
 		// Label
 		JLabel lCoffeeMachine = new JLabel("COFFEE MACHINE");
 		lCoffeeMachine.setForeground(UIManager.getColor("OptionPane.warningDialog.titlePane.background"));
-		lCoffeeMachine.setFont(new Font("Nimbus Mono PS", Font.BOLD, 37));
-		lCoffeeMachine.setBounds(235, 93, 308, 47);  
+		lCoffeeMachine.setFont(new Font("Nimbus Mono PS", Font.BOLD, 35));
+		lCoffeeMachine.setBounds(231, 93, 308, 47);  
 		contentPane.add(lCoffeeMachine);
 		
 		// Buy Button
