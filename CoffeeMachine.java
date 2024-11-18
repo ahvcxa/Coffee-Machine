@@ -3,11 +3,14 @@ package CoffeeMachine;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
@@ -61,23 +64,63 @@ public class CoffeeMachine extends JFrame {
 		buyButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
 		contentPane.add(buyButton);
 	
-		
-		// Type Button
-		JButton typeButton = new JButton("TYPE");
-		typeButton.setBackground(Color.LIGHT_GRAY);
-		typeButton.setBounds(274, 245, 225, 47);
-		// added new font for button text
-		typeButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
-		contentPane.add(typeButton);
-		
 		// turnButton changed name as exitButton
 		JButton exitButton = new JButton("EXIT");
 		exitButton.setBackground(Color.LIGHT_GRAY);
-		exitButton.setBounds(274, 315, 225, 47);
+		exitButton.setBounds(274, 245, 225, 47);
 		// added new font for button text
 		exitButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
 		contentPane.add(exitButton);
 		
+		// Buy Button Action
+		buyButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Create a new frame for coffee options
+				JFrame coffeeOptionsFrame = new JFrame("Choose Your Coffee");
+				coffeeOptionsFrame.setBounds(650, 300, 400, 300);
+				coffeeOptionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				coffeeOptionsFrame.getContentPane().setLayout(null);
+				
+				// Label for instructions
+				JLabel chooseLabel = new JLabel("Choose Your Coffee:");
+				chooseLabel.setFont(new Font("Nimbus Mono PS", Font.BOLD, 18));
+				chooseLabel.setBounds(100, 30, 200, 30);
+				coffeeOptionsFrame.getContentPane().add(chooseLabel);
+				
+				// Button for Espresso
+				JRadioButton espressoButton = new JRadioButton("Espresso");
+				espressoButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 16));
+				espressoButton.setBounds(50, 100, 120, 50);
+				coffeeOptionsFrame.getContentPane().add(espressoButton);
 
+				// Button for Latte
+				JRadioButton latteButton = new JRadioButton("Latte");
+				latteButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 16));
+				latteButton.setBounds(200, 100, 120, 50);
+				coffeeOptionsFrame.getContentPane().add(latteButton);
+				
+				// Add action listeners for buttons
+				espressoButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						System.out.println("Espresso Selected");
+					}
+				});
+
+				latteButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						System.out.println("Latte Selected");
+					}
+				});
+				
+				// Display the frame
+				coffeeOptionsFrame.setVisible(true);
+			}
+		});
+		
+		// 
+	
 	}
 }
