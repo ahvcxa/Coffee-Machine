@@ -1,10 +1,8 @@
-package coffeemachine;
+package CoffeeMachine;
 
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -79,53 +77,5 @@ public class CoffeeMachine extends JFrame {
 		exitButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
 		contentPane.add(exitButton);
 		
-		
-		
-		// These are just view for buttons when mouse top on the button they change their color		
-		
-		buyButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                
-            	buyButton.setBackground(Color.green);  
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                
-            	buyButton.setBackground(Color.LIGHT_GRAY); 
-            }
-        });
-		
-	
-		
-		typeButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                
-            	typeButton.setBackground(Color.orange);  
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-               
-            	typeButton.setBackground(Color.LIGHT_GRAY); 
-            }
-        });
-		
-		
-		exitButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                
-            	exitButton.setBackground(Color.gray);  
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-              
-            	exitButton.setBackground(Color.LIGHT_GRAY);
-            }
-        });
 	}
 }
