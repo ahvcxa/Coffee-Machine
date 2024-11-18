@@ -1,10 +1,10 @@
-package coffeemachine;
+package CoffeeMachine;
 
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
 
 public class CoffeeMachine extends JFrame {
 
@@ -27,6 +28,7 @@ public class CoffeeMachine extends JFrame {
 				try {
 					CoffeeMachine frame = new CoffeeMachine();
 					frame.setVisible(true);
+					frame.setTitle("Coffee Machine");    // added name for the program title
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,35 +52,41 @@ public class CoffeeMachine extends JFrame {
 		// Label
 		JLabel lCoffeeMachine = new JLabel("COFFEE MACHINE");
 		lCoffeeMachine.setForeground(UIManager.getColor("OptionPane.warningDialog.titlePane.background"));
-		lCoffeeMachine.setFont(new Font("Nimbus Mono PS", Font.BOLD, 37));
-		lCoffeeMachine.setBounds(235, 93, 308, 47);  
+		lCoffeeMachine.setFont(new Font("Nimbus Mono PS", Font.BOLD, 35));
+		lCoffeeMachine.setBounds(231, 93, 308, 47);  
 		contentPane.add(lCoffeeMachine);
 		
 		// Buy Button
 		JButton buyButton = new JButton("BUY");
 		buyButton.setBounds(274, 175, 225, 47);  
 		buyButton.setBackground(Color.LIGHT_GRAY);
-		// added new font for button text
-		buyButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
+		
+		buyButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19)); // added new font for button text
 		contentPane.add(buyButton);
 	
 		
-		// Type Button
-		JButton typeButton = new JButton("TYPE");
-		typeButton.setBackground(Color.LIGHT_GRAY);
-		typeButton.setBounds(274, 245, 225, 47);
-		// added new font for button text
-		typeButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
-		contentPane.add(typeButton);
-		
-		// turnButton changed name as exitButton
-		JButton exitButton = new JButton("EXIT");
+		JButton exitButton = new JButton("EXIT"); // turnButton changed name as exitButton
 		exitButton.setBackground(Color.LIGHT_GRAY);
-		exitButton.setBounds(274, 315, 225, 47);
-		// added new font for button text
-		exitButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
+		exitButton.setBounds(274, 245, 225, 47);
+		
+		exitButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19)); // added new font for button text
 		contentPane.add(exitButton);
 		
+		JButton ownerButton = new JButton("OWNER");
+		ownerButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
+		ownerButton.setBackground(Color.LIGHT_GRAY);
+		ownerButton.setBounds(274, 314, 225, 47);
+		contentPane.add(ownerButton);
 		
+		// Added actionlistener for owner button
+		ownerButton.addActionListener(new ActionListener() {  
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose(); // this operation close main page page
+				
+				LoginFrame loginFrame = new LoginFrame(); // Create new object from LoginFrame 
+				loginFrame.setVisible(true);
+			}
+		});
 	}
 }
