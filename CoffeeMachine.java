@@ -1,4 +1,4 @@
-package JavaProject;
+package coffeemachine;
 
 import java.awt.Color;
 import java.awt.EventQueue;
