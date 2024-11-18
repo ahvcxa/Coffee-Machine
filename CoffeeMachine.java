@@ -80,52 +80,5 @@ public class CoffeeMachine extends JFrame {
 		contentPane.add(exitButton);
 		
 		
-		
-		// These are just view for buttons when mouse top on the button they change their color		
-		
-		buyButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                
-            	buyButton.setBackground(Color.green);  
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                
-            	buyButton.setBackground(Color.LIGHT_GRAY); 
-            }
-        });
-		
-	
-		
-		typeButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                
-            	typeButton.setBackground(Color.orange);  
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-               
-            	typeButton.setBackground(Color.LIGHT_GRAY); 
-            }
-        });
-		
-		
-		exitButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                
-            	exitButton.setBackground(Color.gray);  
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-              
-            	exitButton.setBackground(Color.LIGHT_GRAY);
-            }
-        });
 	}
 }
