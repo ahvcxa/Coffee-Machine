@@ -3,11 +3,14 @@ package CoffeeMachine;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
@@ -61,23 +64,12 @@ public class CoffeeMachine extends JFrame {
 		buyButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
 		contentPane.add(buyButton);
 	
-		
-		// Type Button
-		JButton typeButton = new JButton("TYPE");
-		typeButton.setBackground(Color.LIGHT_GRAY);
-		typeButton.setBounds(274, 245, 225, 47);
-		// added new font for button text
-		typeButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
-		contentPane.add(typeButton);
-		
 		// turnButton changed name as exitButton
 		JButton exitButton = new JButton("EXIT");
 		exitButton.setBackground(Color.LIGHT_GRAY);
-		exitButton.setBounds(274, 315, 225, 47);
+		exitButton.setBounds(274, 245, 225, 47);
 		// added new font for button text
 		exitButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
 		contentPane.add(exitButton);
-		
-
 	}
 }
