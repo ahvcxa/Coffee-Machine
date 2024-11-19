@@ -55,6 +55,7 @@ public class LoginFrame extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 CoffeeMachine coffeeMachine = new CoffeeMachine();
+                coffeeMachine.setTitle("Coffee Machine"); 
                 coffeeMachine.setVisible(true);
             }
         });
@@ -99,6 +100,7 @@ public class LoginFrame extends JFrame {
 		        if (userManager.checkLogin(username, password)) {
 		            JOptionPane.showMessageDialog(null, "Login successful!");
 		            OwnerFrame ownerFrame = new OwnerFrame();
+		            ownerFrame.setTitle("Owner Menu");
 		            ownerFrame.setVisible(true);
 		            dispose();
 		            
