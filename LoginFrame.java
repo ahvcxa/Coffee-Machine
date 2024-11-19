@@ -6,9 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -19,7 +22,7 @@ public class LoginFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textUserName;
 	private JPasswordField passwordField;
 	
 	
@@ -31,8 +34,9 @@ public class LoginFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginFrame frame = new LoginFrame();
-					frame.setVisible(true);
+					LoginFrame loginframe = new LoginFrame();
+					loginframe.setTitle("Login");
+					loginframe.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -82,12 +86,35 @@ public class LoginFrame extends JFrame {
 		btnEnter.setBounds(173, 183, 131, 25);
 		contentPane.add(btnEnter);
 		
-		textField = new JTextField();
-		textField.setForeground(Color.WHITE);
-		textField.setBackground(Color.BLACK);
-		textField.setBounds(173, 71, 131, 25);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		btnEnter.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String username = textUserName.getText(); // we got entered username
+		        String password = new String(passwordField.getPassword()); // we got password and convert to char format
+
+		        // Calling object from the UserManager for checking 
+		        UserManager userManager = new UserManager();
+		        if (userManager.checkLogin(username, password)) {
+		            JOptionPane.showMessageDialog(null, "Login successful!");
+		            OwnerFrame ownerFrame = new OwnerFrame();
+		            ownerFrame.setVisible(true);
+		            dispose();
+		            
+		            
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Invalid username or password.");
+		        }
+			}
+		});
+		
+		textUserName = new JTextField();
+		textUserName.setForeground(Color.WHITE);
+		textUserName.setBackground(Color.BLACK);
+		textUserName.setBounds(173, 71, 131, 25);
+		contentPane.add(textUserName);
+		textUserName.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setForeground(Color.WHITE);
