@@ -84,7 +84,8 @@ public class CoffeeMachine extends JFrame {
 				
 				dispose(); // this operation close main page page
 				
-				LoginFrame loginFrame = new LoginFrame(); // Create new object from LoginFrame 
+				LoginFrame loginFrame = new LoginFrame(); // Create new object from LoginFrame
+				loginFrame.setTitle("Login");
 				loginFrame.setVisible(true);
 			}
 		});
