@@ -54,12 +54,12 @@ public class CoffeeMachine extends JFrame {
 		contentPane.add(lCoffeeMachine);
 		
 		// Buy Button
-		JButton buyButton = new JButton("BUY");
-		buyButton.setBounds(274, 175, 225, 47);  
-		buyButton.setBackground(Color.LIGHT_GRAY);
+		JButton OrderButton = new JButton("ORDER");
+		OrderButton.setBounds(274, 175, 225, 47);  
+		OrderButton.setBackground(Color.LIGHT_GRAY);
 		// added new font for button text
-		buyButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
-		contentPane.add(buyButton);
+		OrderButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
+		contentPane.add(OrderButton);
 	
 		// turnButton changed name as exitButton
 		JButton exitButton = new JButton("EXIT");
