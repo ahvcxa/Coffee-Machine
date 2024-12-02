@@ -14,7 +14,6 @@ import javax.swing.UIManager;
 import javax.swing.ButtonGroup;
 import javax.swing.border.EmptyBorder;
 
-// Base class for shared properties and methods
 class BaseFrame extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -34,10 +33,9 @@ class BaseFrame extends JFrame {
     }
 }
 
-// CoffeeMachine class for main frame
 public class CoffeeMachine extends BaseFrame {
     private static final long serialVersionUID = 1L;
-    private double customerMoney = 20.00; // Customer starts with $20.00
+    private double customerMoney = 20.00;
 
     public static void main(String[] args) {
         CoffeeMachine frame = new CoffeeMachine();
@@ -61,6 +59,15 @@ public class CoffeeMachine extends BaseFrame {
         JButton exitButton = createButton("EXIT", 274, 245, 225, 47, 19);
         exitButton.addActionListener(e -> System.exit(0));
         getContentPanePanel().add(exitButton);
+
+        JButton ownerButton = createButton("OWNER", 274, 315, 225, 47, 19);
+        ownerButton.addActionListener(e -> {
+            int a = 100;
+            int b = 50;
+            int c = 75;
+            System.out.println("I: " + a + " M: " + b + " S: " + c);
+        });
+        getContentPanePanel().add(ownerButton);
     }
 
     private JLabel createLabel(String text, int x, int y, int width, int height, int fontSize) {
@@ -88,7 +95,6 @@ public class CoffeeMachine extends BaseFrame {
     }
 }
 
-// CoffeeOptionsFrame class for the coffee selection window
 class CoffeeOptionsFrame extends BaseFrame {
     private static final long serialVersionUID = 1L;
     private JRadioButton espressoButton;
@@ -106,8 +112,7 @@ class CoffeeOptionsFrame extends BaseFrame {
     public CoffeeOptionsFrame(CoffeeMachine coffeeMachine) {
         this.coffeeMachine = coffeeMachine;
 
-        // Increase the size of the frame to fit everything
-        setBounds(650, 300, 450, 400);  // Increased width and height
+        setBounds(650, 300, 450, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Choose Your Coffee");
 
@@ -186,7 +191,6 @@ class CoffeeOptionsFrame extends BaseFrame {
             System.out.println("No coffee type selected.");
         }
 
-        // Close the coffee options window after confirming selection
-        dispose();  // This closes the "Choose Your Coffee" window
+        dispose();
     }
 }
