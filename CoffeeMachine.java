@@ -1,7 +1,6 @@
 package CoffeeMachine;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,136 +14,179 @@ import javax.swing.UIManager;
 import javax.swing.ButtonGroup;
 import javax.swing.border.EmptyBorder;
 
-public class CoffeeMachine extends JFrame {
+// Base class for shared properties and methods
+class BaseFrame extends JFrame {
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    public BaseFrame() {
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(Color.DARK_GRAY);
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+    }
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CoffeeMachine frame = new CoffeeMachine();
-					frame.setVisible(true);
-					frame.setTitle("Coffee Machine"); // added name for the program title
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public JPanel getContentPanePanel() {
+        return contentPane;
+    }
+}
 
-	/**
-	 * Create the frame.
-	 */
-	public CoffeeMachine() {
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(600, 250, 782, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBackground(Color.DARK_GRAY);
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+// CoffeeMachine class for main frame
+public class CoffeeMachine extends BaseFrame {
+    private static final long serialVersionUID = 1L;
+    private double customerMoney = 20.00; // Customer starts with $20.00
 
-		// Label
-		JLabel lCoffeeMachine = new JLabel("COFFEE MACHINE");
-		lCoffeeMachine.setForeground(UIManager.getColor("OptionPane.warningDialog.titlePane.background"));
-		lCoffeeMachine.setFont(new Font("Nimbus Mono PS", Font.BOLD, 35));
-		lCoffeeMachine.setBounds(231, 93, 308, 47);
-		contentPane.add(lCoffeeMachine);
+    public static void main(String[] args) {
+        CoffeeMachine frame = new CoffeeMachine();
+        frame.setVisible(true);
+        frame.setTitle("Coffee Machine");
+    }
 
-		// Buy Button
-		JButton buyButton = new JButton("BUY");
-		buyButton.setBounds(274, 175, 225, 47);
-		buyButton.setBackground(Color.LIGHT_GRAY);
-		buyButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
-		contentPane.add(buyButton);
+    public CoffeeMachine() {
+        setBounds(600, 250, 782, 500);
 
-		// Exit Button
-		JButton exitButton = new JButton("EXIT");
-		exitButton.setBackground(Color.LIGHT_GRAY);
-		exitButton.setBounds(274, 245, 225, 47);
-		exitButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
-		contentPane.add(exitButton);
+        JLabel lCoffeeMachine = createLabel("COFFEE MACHINE", 231, 93, 308, 47, 35);
+        getContentPanePanel().add(lCoffeeMachine);
 
-		// Exit Button Action
-		exitButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0); // Terminates the program
-			}
-		});
+        JButton buyButton = createButton("BUY", 274, 175, 225, 47, 19);
+        buyButton.addActionListener(e -> {
+            CoffeeOptionsFrame coffeeOptions = new CoffeeOptionsFrame(this);
+            coffeeOptions.setVisible(true);
+        });
+        getContentPanePanel().add(buyButton);
 
-		// Buy Button Action
-		buyButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JFrame coffeeOptionsFrame = new JFrame("Choose Your Coffee");
-				coffeeOptionsFrame.setBounds(650, 300, 400, 300);
-				coffeeOptionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				coffeeOptionsFrame.setLayout(null);
+        JButton exitButton = createButton("EXIT", 274, 245, 225, 47, 19);
+        exitButton.addActionListener(e -> System.exit(0));
+        getContentPanePanel().add(exitButton);
+    }
 
-				JPanel panel = new JPanel();
-				panel.setBackground(Color.DARK_GRAY);
-				panel.setBounds(0, 0, 400, 300);
-				panel.setLayout(null);
-				coffeeOptionsFrame.add(panel);
+    private JLabel createLabel(String text, int x, int y, int width, int height, int fontSize) {
+        JLabel label = new JLabel(text);
+        label.setForeground(UIManager.getColor("OptionPane.warningDialog.titlePane.background"));
+        label.setFont(new Font("Nimbus Mono PS", Font.BOLD, fontSize));
+        label.setBounds(x, y, width, height);
+        return label;
+    }
 
-				JLabel label = new JLabel("Choose Your Coffee");
-				label.setForeground(UIManager.getColor("OptionPane.warningDialog.titlePane.background"));
-				label.setFont(new Font("Nimbus Mono PS", Font.BOLD, 20));
-				label.setBounds(90, 30, 220, 30);
-				panel.add(label);
+    private JButton createButton(String text, int x, int y, int width, int height, int fontSize) {
+        JButton button = new JButton(text);
+        button.setBounds(x, y, width, height);
+        button.setBackground(Color.LIGHT_GRAY);
+        button.setFont(new Font("Nimbus Mono PS", Font.BOLD, fontSize));
+        return button;
+    }
 
-				// Espresso Button
-				JRadioButton espressoButton = new JRadioButton("Espresso");
-				espressoButton.setBounds(110, 100, 150, 40);
-				espressoButton.setBackground(Color.DARK_GRAY);
-				espressoButton.setForeground(Color.WHITE);
-				espressoButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 16));
-				panel.add(espressoButton);
+    public double getCustomerMoney() {
+        return customerMoney;
+    }
 
-				// Latte Button
-				JRadioButton latteButton = new JRadioButton("Latte");
-				latteButton.setBounds(110, 160, 150, 40);
-				latteButton.setBackground(Color.DARK_GRAY);
-				latteButton.setForeground(Color.WHITE);
-				latteButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 16));
-				panel.add(latteButton);
+    public void setCustomerMoney(double customerMoney) {
+        this.customerMoney = customerMoney;
+    }
+}
 
-				// Group the radio buttons to allow only one selection
-				ButtonGroup coffeeGroup = new ButtonGroup();
-				coffeeGroup.add(espressoButton);
-				coffeeGroup.add(latteButton);
+// CoffeeOptionsFrame class for the coffee selection window
+class CoffeeOptionsFrame extends BaseFrame {
+    private static final long serialVersionUID = 1L;
+    private JRadioButton espressoButton;
+    private JRadioButton latteButton;
+    private JRadioButton cappuccinoButton;
+    private JRadioButton americanoButton;
 
-				// Confirm Button
-				JButton confirmButton = new JButton("CONFIRM");
-				confirmButton.setBounds(110, 220, 150, 40);
-				confirmButton.setBackground(Color.LIGHT_GRAY);
-				confirmButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 16));
-				panel.add(confirmButton);
+    private final double ESPRESSO_PRICE = 5.00;
+    private final double LATTE_PRICE = 6.50;
+    private final double CAPPUCCINO_PRICE = 7.00;
+    private final double AMERICANO_PRICE = 4.50;
 
-				// Confirm Button Action
-				confirmButton.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (espressoButton.isSelected()) {
-							System.out.println("Espresso selected.");
-						} else if (latteButton.isSelected()) {
-							System.out.println("Latte selected.");
-						} else {
-							System.out.println("No coffee type selected.");
-						}
-					}
-				});
+    private CoffeeMachine coffeeMachine;
 
-				// Display the frame
-				coffeeOptionsFrame.setVisible(true);
-			}
-		});
-	}
+    public CoffeeOptionsFrame(CoffeeMachine coffeeMachine) {
+        this.coffeeMachine = coffeeMachine;
+
+        // Increase the size of the frame to fit everything
+        setBounds(650, 300, 450, 400);  // Increased width and height
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Choose Your Coffee");
+
+        JLabel label = createLabel("Choose Your Coffee", 90, 30, 220, 30, 20);
+        getContentPanePanel().add(label);
+
+        espressoButton = createRadioButton("Espresso - $5.00", 90, 80, 200, 40);
+        getContentPanePanel().add(espressoButton);
+
+        latteButton = createRadioButton("Latte - $6.50", 90, 120, 200, 40);
+        getContentPanePanel().add(latteButton);
+
+        cappuccinoButton = createRadioButton("Cappuccino - $7.00", 90, 160, 200, 40);
+        getContentPanePanel().add(cappuccinoButton);
+
+        americanoButton = createRadioButton("Americano - $4.50", 90, 200, 200, 40);
+        getContentPanePanel().add(americanoButton);
+
+        ButtonGroup coffeeGroup = new ButtonGroup();
+        coffeeGroup.add(espressoButton);
+        coffeeGroup.add(latteButton);
+        coffeeGroup.add(cappuccinoButton);
+        coffeeGroup.add(americanoButton);
+
+        JButton confirmButton = createButton("CONFIRM", 125, 260, 150, 40, 16);
+        confirmButton.addActionListener(e -> handleSelection());
+        getContentPanePanel().add(confirmButton);
+    }
+
+    private JRadioButton createRadioButton(String text, int x, int y, int width, int height) {
+        JRadioButton radioButton = new JRadioButton(text);
+        radioButton.setBounds(x, y, width, height);
+        radioButton.setBackground(Color.DARK_GRAY);
+        radioButton.setForeground(Color.WHITE);
+        radioButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 16));
+        return radioButton;
+    }
+
+    private JButton createButton(String text, int x, int y, int width, int height, int fontSize) {
+        JButton button = new JButton(text);
+        button.setBounds(x, y, width, height);
+        button.setBackground(Color.LIGHT_GRAY);
+        button.setFont(new Font("Nimbus Mono PS", Font.BOLD, fontSize));
+        return button;
+    }
+
+    private JLabel createLabel(String text, int x, int y, int width, int height, int fontSize) {
+        JLabel label = new JLabel(text);
+        label.setForeground(UIManager.getColor("OptionPane.warningDialog.titlePane.background"));
+        label.setFont(new Font("Nimbus Mono PS", Font.BOLD, fontSize));
+        label.setBounds(x, y, width, height);
+        return label;
+    }
+
+    private void handleSelection() {
+        double price = 0;
+        if (espressoButton.isSelected()) {
+            price = ESPRESSO_PRICE;
+        } else if (latteButton.isSelected()) {
+            price = LATTE_PRICE;
+        } else if (cappuccinoButton.isSelected()) {
+            price = CAPPUCCINO_PRICE;
+        } else if (americanoButton.isSelected()) {
+            price = AMERICANO_PRICE;
+        }
+
+        if (price > 0) {
+            double currentMoney = coffeeMachine.getCustomerMoney();
+            if (currentMoney >= price) {
+                coffeeMachine.setCustomerMoney(currentMoney - price);
+                System.out.printf("You bought coffee for $%.2f. Remaining balance: $%.2f\n", price, coffeeMachine.getCustomerMoney());
+            } else {
+                System.out.println("Insufficient funds. Please add more money.");
+            }
+        } else {
+            System.out.println("No coffee type selected.");
+        }
+
+        // Close the coffee options window after confirming selection
+        dispose();  // This closes the "Choose Your Coffee" window
+    }
 }
