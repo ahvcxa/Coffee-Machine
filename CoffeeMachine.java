@@ -2,16 +2,7 @@ package CoffeeMachine;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.UIManager;
-import javax.swing.ButtonGroup;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 class BaseFrame extends JFrame {
@@ -35,7 +26,7 @@ class BaseFrame extends JFrame {
 
 public class CoffeeMachine extends BaseFrame {
     private static final long serialVersionUID = 1L;
-    private double customerMoney = 20.00;
+    private double customerMoney = 0.00;
 
     public static void main(String[] args) {
         CoffeeMachine frame = new CoffeeMachine();
@@ -46,17 +37,35 @@ public class CoffeeMachine extends BaseFrame {
     public CoffeeMachine() {
         setBounds(600, 250, 782, 500);
 
-        JLabel lCoffeeMachine = createLabel("COFFEE MACHINE", 231, 93, 308, 47, 35);
+        JLabel lCoffeeMachine = createLabel("COFFEE MACHINE", 231, 50, 308, 47, 35);
         getContentPanePanel().add(lCoffeeMachine);
 
-        JButton buyButton = createButton("BUY", 274, 175, 225, 47, 19);
+        JLabel moneyLabel = createLabel("Enter your money:", 231, 120, 200, 30, 16);
+        getContentPanePanel().add(moneyLabel);
+
+        JTextField moneyField = new JTextField();
+        moneyField.setBounds(430, 120, 100, 30);
+        getContentPanePanel().add(moneyField);
+
+        JButton submitMoneyButton = createButton("SUBMIT", 550, 120, 100, 30, 14);
+        submitMoneyButton.addActionListener(e -> {
+            try {
+                customerMoney = Double.parseDouble(moneyField.getText());
+                JOptionPane.showMessageDialog(this, String.format("You entered $%.2f", customerMoney));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid amount. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        getContentPanePanel().add(submitMoneyButton);
+
+        JButton buyButton = createButton("BUY", 274, 200, 225, 47, 19);
         buyButton.addActionListener(e -> {
             CoffeeOptionsFrame coffeeOptions = new CoffeeOptionsFrame(this);
             coffeeOptions.setVisible(true);
         });
         getContentPanePanel().add(buyButton);
 
-        JButton exitButton = createButton("EXIT", 274, 245, 225, 47, 19);
+        JButton exitButton = createButton("EXIT", 274, 270, 225, 47, 19);
         exitButton.addActionListener(e -> System.exit(0));
         getContentPanePanel().add(exitButton);
     }
@@ -174,12 +183,12 @@ class CoffeeOptionsFrame extends BaseFrame {
             double currentMoney = coffeeMachine.getCustomerMoney();
             if (currentMoney >= price) {
                 coffeeMachine.setCustomerMoney(currentMoney - price);
-                System.out.printf("You bought coffee for $%.2f. Remaining balance: $%.2f\n", price, coffeeMachine.getCustomerMoney());
+                JOptionPane.showMessageDialog(this, String.format("You bought coffee for $%.2f. Remaining balance: $%.2f", price, coffeeMachine.getCustomerMoney()));
             } else {
-                System.out.println("Insufficient funds. Please add more money.");
+                JOptionPane.showMessageDialog(this, "Insufficient funds. Please add more money.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            System.out.println("No coffee type selected.");
+            JOptionPane.showMessageDialog(this, "No coffee type selected.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
 
         dispose();
