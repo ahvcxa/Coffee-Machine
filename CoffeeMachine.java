@@ -59,15 +59,6 @@ public class CoffeeMachine extends BaseFrame {
         JButton exitButton = createButton("EXIT", 274, 245, 225, 47, 19);
         exitButton.addActionListener(e -> System.exit(0));
         getContentPanePanel().add(exitButton);
-
-        JButton ownerButton = createButton("OWNER", 274, 315, 225, 47, 19);
-        ownerButton.addActionListener(e -> {
-            int a = 100;
-            int b = 50;
-            int c = 75;
-            System.out.println("I: " + a + " M: " + b + " S: " + c);
-        });
-        getContentPanePanel().add(ownerButton);
     }
 
     private JLabel createLabel(String text, int x, int y, int width, int height, int fontSize) {
