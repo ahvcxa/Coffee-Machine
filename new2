@@ -1,20 +1,18 @@
 package CoffeeMachine;
 
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-
-public class CoffeeMachine extends JFrame {
+public class CoffeeOptions extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -26,9 +24,8 @@ public class CoffeeMachine extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CoffeeMachine frame = new CoffeeMachine();
+					CoffeeOptions frame = new CoffeeOptions();
 					frame.setVisible(true);
-					frame.setTitle("Coffee Machine");    // added name for the program title
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -39,51 +36,54 @@ public class CoffeeMachine extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CoffeeMachine() {
-		setTitle("Coffee Machine");
-		setResizable(false);
+	public CoffeeOptions() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(600, 250, 782, 500);  
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBackground(Color.DARK_GRAY);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
 		setContentPane(contentPane);
-		contentPane.setLayout(null);  
+		contentPane.setLayout(null);
 		
-		// Label
-		JLabel lCoffeeMachine = new JLabel("COFFEE MACHINE");
-		lCoffeeMachine.setForeground(UIManager.getColor("OptionPane.warningDialog.titlePane.background"));
-		lCoffeeMachine.setFont(new Font("Nimbus Mono PS", Font.BOLD, 35));
-		lCoffeeMachine.setBounds(231, 93, 308, 47);  
-		contentPane.add(lCoffeeMachine);
+		JLabel lblNewLabel = new JLabel("Choose your coffee:");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblNewLabel.setBounds(21, 11, 155, 21);
+		contentPane.add(lblNewLabel);
 		
-		// Buy Button
-		JButton buyButton = new JButton("BUY");
-		 buyButton.addActionListener(e -> {
-	            CoffeeOptions coffeeOptions = new CoffeeOptions();
-	            coffeeOptions.setTitle("Coffee Options");
-	            coffeeOptions.setVisible(true);
-	        });
-		buyButton.setBounds(274, 175, 225, 47);  
-		buyButton.setBackground(Color.LIGHT_GRAY);
+		JLabel lblNewLabel_1 = new JLabel("01  Americano");
+		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setBounds(21, 43, 109, 14);
+		contentPane.add(lblNewLabel_1);
 		
-		buyButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19)); // added new font for button text
-		contentPane.add(buyButton);
-	
+		JButton btnNewButton_2 = new JButton("3");
+		btnNewButton_2.setBounds(307, 133, 39, 34);
+		contentPane.add(btnNewButton_2);
 		
-		JButton exitButton = new JButton("EXIT"); // turnButton changed name as exitButton
-		exitButton.addActionListener(e -> System.exit(0));
-		exitButton.setBackground(Color.LIGHT_GRAY);
-		exitButton.setBounds(274, 245, 225, 47);
+		JButton btnNewButton_2_1 = new JButton("2");
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_2_1.setBounds(307, 88, 39, 34);
+		contentPane.add(btnNewButton_2_1);
 		
-		exitButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19)); // added new font for button text
-		contentPane.add(exitButton);
+		JButton btnNewButton_2_2 = new JButton("1");
+		btnNewButton_2_2.setBounds(307, 43, 39, 34);
+		contentPane.add(btnNewButton_2_2);
 		
-		JButton ownerButton = new JButton("OWNER");
-		ownerButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
-		ownerButton.setBackground(Color.LIGHT_GRAY);
-		ownerButton.setBounds(274, 314, 225, 47);
-		contentPane.add(ownerButton);
+		JLabel lblNewLabel_1_1 = new JLabel("02  Espresso");
+		lblNewLabel_1_1.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblNewLabel_1_1.setForeground(Color.WHITE);
+		lblNewLabel_1_1.setBounds(21, 72, 109, 14);
+		contentPane.add(lblNewLabel_1_1);
 		
+		JLabel lblNewLabel_1_2 = new JLabel("03  Cappuccino");
+		lblNewLabel_1_2.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblNewLabel_1_2.setForeground(Color.WHITE);
+		lblNewLabel_1_2.setBounds(21, 97, 109, 14);
+		contentPane.add(lblNewLabel_1_2);
 	}
 }
