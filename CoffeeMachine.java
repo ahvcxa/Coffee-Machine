@@ -1,7 +1,6 @@
 package CoffeeMachine;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -10,17 +9,38 @@ class BaseFrame extends JFrame {
     private JPanel contentPane;
 
     public BaseFrame() {
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setBackground(Color.DARK_GRAY);
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                resizeComponents();
+            }
+        });
     }
 
     public JPanel getContentPanePanel() {
         return contentPane;
+    }
+
+    private void resizeComponents() {
+        for (Component component : contentPane.getComponents()) {
+            if (component instanceof JComponent) {
+                Rectangle bounds = component.getBounds();
+                double widthScale = getWidth() / 782.0;
+                double heightScale = getHeight() / 500.0;
+                component.setBounds(
+                    (int) (bounds.x * widthScale), 
+                    (int) (bounds.y * heightScale), 
+                    (int) (bounds.width * widthScale), 
+                    (int) (bounds.height * heightScale)
+                );
+            }
+        }
     }
 }
 
@@ -37,41 +57,42 @@ public class CoffeeMachine extends BaseFrame {
     public CoffeeMachine() {
         setBounds(600, 250, 782, 500);
 
-        JLabel lCoffeeMachine = createLabel("COFFEE MACHINE", 231, 50, 308, 47, 35);
+        JLabel lCoffeeMachine = createLabel("COFFEE MACHINE", 100, 50, 582, 47, 35);
         getContentPanePanel().add(lCoffeeMachine);
 
-        JLabel moneyLabel = createLabel("Enter your money:", 231, 120, 200, 30, 16);
+        JLabel moneyLabel = createLabel("Enter Your Money:", 200, 150, 200, 30, 18);
         getContentPanePanel().add(moneyLabel);
 
         JTextField moneyField = new JTextField();
-        moneyField.setBounds(430, 120, 100, 30);
+        moneyField.setFont(new Font("Nimbus Mono PS", Font.PLAIN, 16));
+        moneyField.setBounds(400, 150, 150, 30);
         getContentPanePanel().add(moneyField);
 
-        JButton submitMoneyButton = createButton("SUBMIT", 550, 120, 100, 30, 14);
+        JButton submitMoneyButton = createButton("SUBMIT", 570, 150, 100, 30, 14);
         submitMoneyButton.addActionListener(e -> {
             try {
                 customerMoney = Double.parseDouble(moneyField.getText());
-                JOptionPane.showMessageDialog(this, String.format("You entered $%.2f", customerMoney));
+                JOptionPane.showMessageDialog(this, String.format("You entered $%.2f", customerMoney), "Money Submitted", JOptionPane.INFORMATION_MESSAGE);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Invalid amount. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
         getContentPanePanel().add(submitMoneyButton);
 
-        JButton buyButton = createButton("BUY", 274, 200, 225, 47, 19);
+        JButton buyButton = createStyledButton("BUY COFFEE", 200, 250, 375, 50, 22, Color.GREEN);
         buyButton.addActionListener(e -> {
             CoffeeOptionsFrame coffeeOptions = new CoffeeOptionsFrame(this);
             coffeeOptions.setVisible(true);
         });
         getContentPanePanel().add(buyButton);
 
-        JButton exitButton = createButton("EXIT", 274, 270, 225, 47, 19);
+        JButton exitButton = createStyledButton("EXIT", 200, 330, 375, 50, 22, Color.RED);
         exitButton.addActionListener(e -> System.exit(0));
         getContentPanePanel().add(exitButton);
     }
 
     private JLabel createLabel(String text, int x, int y, int width, int height, int fontSize) {
-        JLabel label = new JLabel(text);
+        JLabel label = new JLabel(text, SwingConstants.CENTER);
         label.setForeground(UIManager.getColor("OptionPane.warningDialog.titlePane.background"));
         label.setFont(new Font("Nimbus Mono PS", Font.BOLD, fontSize));
         label.setBounds(x, y, width, height);
@@ -83,6 +104,16 @@ public class CoffeeMachine extends BaseFrame {
         button.setBounds(x, y, width, height);
         button.setBackground(Color.LIGHT_GRAY);
         button.setFont(new Font("Nimbus Mono PS", Font.BOLD, fontSize));
+        return button;
+    }
+
+    private JButton createStyledButton(String text, int x, int y, int width, int height, int fontSize, Color color) {
+        JButton button = new JButton(text);
+        button.setBounds(x, y, width, height);
+        button.setFont(new Font("Nimbus Mono PS", Font.BOLD, fontSize));
+        button.setBackground(color);
+        button.setForeground(Color.WHITE);
+        button.setFocusPainted(false);
         return button;
     }
 
@@ -183,7 +214,7 @@ class CoffeeOptionsFrame extends BaseFrame {
             double currentMoney = coffeeMachine.getCustomerMoney();
             if (currentMoney >= price) {
                 coffeeMachine.setCustomerMoney(currentMoney - price);
-                JOptionPane.showMessageDialog(this, String.format("You bought coffee for $%.2f. Remaining balance: $%.2f", price, coffeeMachine.getCustomerMoney()));
+                JOptionPane.showMessageDialog(this, String.format("You bought coffee for $%.2f. Remaining balance: $%.2f", price, coffeeMachine.getCustomerMoney()), "Purchase Successful", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Insufficient funds. Please add more money.", "Error", JOptionPane.ERROR_MESSAGE);
             }
