@@ -77,6 +77,16 @@ public class CoffeeMachine extends JFrame {
 		ownerButton.setBackground(Color.LIGHT_GRAY);
 		ownerButton.setBounds(274, 314, 225, 47);
 		contentPane.add(ownerButton);
+		ownerButton.addActionListener(new ActionListener() {  
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose(); // this operation close main page page
+				
+				LoginFrame loginFrame = new LoginFrame(); // Create new object from LoginFrame
+				loginFrame.setTitle("Login");
+				loginFrame.setVisible(true);
+			}
+		});
 		
 	}
 }
