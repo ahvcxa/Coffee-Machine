@@ -4,12 +4,13 @@ import javax.swing.JOptionPane;
 
 public class Store {
 
-    public float COFFEE = 1000;
-    public float WATER = 3000;
-    public float MILK = 3000;
+    // Make these static to keep their values persistent across method calls
+    private static float COFFEE = 100;
+    private static float WATER = 1000;
+    private static float MILK = 1000;
 
     // Function to show stock using JOptionPane
-    public void showStock() {
+    public static void showStock() {
         String stockInfo = 
                            "Coffee: " + COFFEE + " ml\n" +
                            "Water: " + WATER + " ml\n" +
@@ -20,7 +21,7 @@ public class Store {
     }
 
     // Function to add stock
-    public void addStock() {
+    public static void addStock() {
         try {
             // Ask user for the amounts to add
             String coffeeInput = JOptionPane.showInputDialog("Enter amount of coffee to add (ml):");
@@ -63,29 +64,28 @@ public class Store {
         }
     }
 
-
     // Getter methods (optional)
-    public float getCOFFEE() {
+    public static float getCOFFEE() {
         return COFFEE;
     }
 
-    public float getWATER() {
+    public static float getWATER() {
         return WATER;
     }
 
-    public float getMILK() {
+    public static float getMILK() {
         return MILK;
     }
-    
-    public void setCOFFEE(float f) {
-        this.COFFEE = f;
+
+    public static void setCOFFEE(float f) {
+        COFFEE = f;
     }
     
-    public void setWATER(float f) {
-        this.WATER = f;
+    public static void setWATER(float f) {
+        WATER = f;
     }
     
-    public void setMILK(float f) {
-        this.MILK = f;
+    public static void setMILK(float f) {
+        MILK = f;
     }
 }
