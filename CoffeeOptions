@@ -52,7 +52,7 @@ public class CoffeeOptions extends JFrame {
 		lblNewLabel.setBounds(21, 11, 155, 21);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("01  Americano");
+		JLabel lblNewLabel_1 = new JLabel("01  Americano $4");
 		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 13));
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setBounds(21, 43, 109, 14);
@@ -74,16 +74,29 @@ public class CoffeeOptions extends JFrame {
 		btnNewButton_2_2.setBounds(307, 43, 39, 34);
 		contentPane.add(btnNewButton_2_2);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("02  Espresso");
+		JLabel lblNewLabel_1_1 = new JLabel("02  Espresso $5");
 		lblNewLabel_1_1.setFont(new Font("Dialog", Font.BOLD, 13));
 		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setBounds(21, 72, 109, 14);
+		lblNewLabel_1_1.setBounds(21, 68, 109, 14);
 		contentPane.add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("03  Cappuccino");
+		JLabel lblNewLabel_1_2 = new JLabel("03  Cappuccino $3");
 		lblNewLabel_1_2.setFont(new Font("Dialog", Font.BOLD, 13));
 		lblNewLabel_1_2.setForeground(Color.WHITE);
-		lblNewLabel_1_2.setBounds(21, 97, 109, 14);
+		lblNewLabel_1_2.setBounds(21, 97, 125, 14);
 		contentPane.add(lblNewLabel_1_2);
+		
+		JButton btnNewButton = new JButton("Add Money");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Money money = new Money();
+				money.addMoney();		
+			}
+		});
+		btnNewButton.setBounds(50, 160, 109, 34);
+		contentPane.add(btnNewButton);
+		
+		
+		
 	}
 }
