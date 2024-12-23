@@ -1,0 +1,130 @@
+package CoffeeMachine;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class OwnerFrame extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					OwnerFrame frame = new OwnerFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public OwnerFrame() {
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                CoffeeMachine coffeeMachine = new CoffeeMachine();
+                coffeeMachine.setTitle("Coffee Machine"); 
+                coffeeMachine.setVisible(true);
+            }
+        });
+		setBounds(600, 250, 782, 500);  
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Color.DARK_GRAY);
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton checkButton = new JButton("CHECK");
+		checkButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				checkButton.setBackground(Color.CYAN);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				checkButton.setBackground(Color.LIGHT_GRAY);
+			}
+		});
+		checkButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Storage.showStock();
+			}
+		});
+		
+		checkButton.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
+		checkButton.setBackground(Color.LIGHT_GRAY);
+		checkButton.setBounds(277, 170, 225, 47);
+		contentPane.add(checkButton);
+		
+		JButton btnAdd = new JButton("ADD");
+		btnAdd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnAdd.setBackground(Color.GREEN);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnAdd.setBackground(Color.LIGHT_GRAY);
+			}
+		});
+		
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Storage.addStock();
+			}
+		});
+		btnAdd.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
+		btnAdd.setBackground(Color.LIGHT_GRAY);
+		btnAdd.setBounds(277, 240, 225, 47);
+		contentPane.add(btnAdd);
+		
+		JButton btnExit = new JButton("EXIT");
+		btnExit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnExit.setBackground(Color.RED);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnExit.setBackground(Color.LIGHT_GRAY);
+			}
+		});
+		
+		btnExit.setFont(new Font("Nimbus Mono PS", Font.BOLD, 19));
+		btnExit.setBackground(Color.LIGHT_GRAY);
+		btnExit.setBounds(277, 309, 225, 47);
+		contentPane.add(btnExit);
+		
+		JLabel lblNewLabel = new JLabel("OWNER MENU");
+		lblNewLabel.setForeground(new Color(245, 222, 179));
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 35));
+		lblNewLabel.setBounds(268, 103, 244, 47);
+		contentPane.add(lblNewLabel);
+		btnExit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CoffeeMachine coffeeMachine = new CoffeeMachine();
+				coffeeMachine.setTitle("Coffee Machine"); 
+				coffeeMachine.setVisible(true);
+				dispose();
+			}
+		});
+	}
+}
