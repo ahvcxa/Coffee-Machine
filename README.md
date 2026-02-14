@@ -26,6 +26,7 @@ It follows a layered structure using:
 - Mehmet Kaya
 - Ayşe Demir
 
+---
 
 ## 🏗 Project Structure
 
