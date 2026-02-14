@@ -21,7 +21,7 @@ It follows a layered structure using:
 
 ---
 
-## Team Members
+## 👥 Team Members
 - Ali Yılmaz
 - Mehmet Kaya
 - Ayşe Demir
