@@ -21,6 +21,12 @@ It follows a layered structure using:
 
 ---
 
+## Team Members
+- Ali Yılmaz
+- Mehmet Kaya
+- Ayşe Demir
+
+
 ## 🏗 Project Structure
 
 ```
